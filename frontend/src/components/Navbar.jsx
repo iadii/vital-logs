@@ -22,58 +22,58 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="flex items-center gap-4 px-6 py-2 rounded-full bg-zinc-900/50 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50">
-        
-        {/* Brand */}
-        <Link to="/" className="px-5 py-2">
-           <span className="font-serif italic font-bold text-white tracking-tight">Vital Logs</span>
+    <>
+      {/* 1. Brand Island (Left) */}
+      <div className="fixed top-6 left-8 z-50">
+        <Link 
+          to="/" 
+          className="flex items-center gap-2 px-5 py-3 rounded-full bg-zinc-950/80 backdrop-blur-xl border border-white/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)] ring-1 ring-white/5 transition-all duration-300 hover:bg-zinc-900 hover:ring-white/20 hover:scale-105"
+        >
+          <span className="font-serif italic font-bold text-white tracking-tight text-lg">Vital Logs</span>
         </Link>
+      </div>
 
-        {/* Separator */}
-        <div className="w-px h-5 bg-white/10"></div>
-
-        {/* Navigation Links */}
-        <div className="flex items-center">
+      {/* 2. Navigation Island (Center) */}
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        <div className="flex items-center gap-1 px-2 py-2 rounded-full bg-zinc-950/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
           <Link 
             to="/" 
-            className={`px-4 py-2 text-xs font-medium tracking-widest uppercase transition-colors rounded-full ${isActive('/') ? 'text-white bg-white/10' : 'text-zinc-500 hover:text-white'}`}
+            className={`relative px-6 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-full ${isActive('/') ? 'text-black bg-white shadow-[0_0_20px_rgba(255,255,255,0.4)]' : 'text-zinc-500 hover:text-white hover:bg-white/5'}`}
           >
             Home
           </Link>
           <Link 
             to={isAuthenticated ? "/dashboard" : "/login"}
-            className={`px-4 py-2 text-xs font-medium tracking-widest uppercase transition-colors rounded-full ${isActive('/dashboard') ? 'text-white bg-white/10' : 'text-zinc-500 hover:text-white'}`}
+            className={`relative px-6 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-full ${isActive('/dashboard') ? 'text-black bg-white shadow-[0_0_20px_rgba(255,255,255,0.4)]' : 'text-zinc-500 hover:text-white hover:bg-white/5'}`}
           >
             Explore
           </Link>
           {isAuthenticated && (
             <Link 
               to="/create" 
-              className={`px-4 py-2 text-xs font-medium tracking-widest uppercase transition-colors rounded-full ${isActive('/create') ? 'text-white bg-white/10' : 'text-zinc-500 hover:text-white'}`}
+              className={`relative px-6 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-full ${isActive('/create') ? 'text-black bg-white shadow-[0_0_20px_rgba(255,255,255,0.4)]' : 'text-zinc-500 hover:text-white hover:bg-white/5'}`}
             >
               Write
             </Link>
           )}
         </div>
+      </div>
 
-        {/* Separator */}
-        <div className="w-px h-5 bg-white/10"></div>
-
-        {/* Auth Actions */}
-        <div className="flex items-center gap-1 px-1">
+      {/* 3. Auth Island (Right) */}
+      <div className="fixed top-6 right-8 z-50">
+        <div className="flex items-center gap-2 px-2 py-2 rounded-full bg-zinc-950/80 backdrop-blur-xl border border-white/10 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)] ring-1 ring-white/5">
           {isAuthenticated ? (
             <>
               <Link 
                 to="/profile" 
-                className={`p-2.5 rounded-full transition-all ${isActive('/profile') ? 'bg-white text-zinc-900' : 'text-zinc-400 hover:text-white hover:bg-white/10'}`}
+                className={`p-2.5 rounded-full transition-all duration-300 ${isActive('/profile') ? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.4)]' : 'text-zinc-400 hover:text-white hover:bg-white/10'}`}
                 aria-label="Profile"
               >
                 <User weight={isActive('/profile') ? 'fill' : 'regular'} size={18} />
               </Link>
               <button 
                 onClick={handleLogout} 
-                className="p-2.5 rounded-full text-zinc-400 hover:text-red-400 hover:bg-red-500/10 transition-all"
+                className="p-2.5 rounded-full text-zinc-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-300"
                 aria-label="Sign Out"
               >
                 <SignOut weight="regular" size={18} />
@@ -82,15 +82,14 @@ const Navbar = () => {
           ) : (
             <Link 
               to="/login" 
-              className="px-4 py-2 text-xs font-medium tracking-widest uppercase bg-white text-zinc-900 rounded-full hover:bg-zinc-200 transition-colors"
+              className="px-6 py-2 text-xs font-bold tracking-widest uppercase bg-white text-black rounded-full hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
             >
               Log In
             </Link>
           )}
         </div>
-
       </div>
-    </div>
+    </>
   );
 };
 
