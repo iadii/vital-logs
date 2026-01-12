@@ -15,13 +15,13 @@ import Profile from './pages/Profile';
 
 const MainLayout = () => {
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const isFullPageRoute = location.pathname === '/' || location.pathname === '/login';
 
   return (
     <div className="min-h-screen relative font-sans antialiased text-zinc-100 selection:bg-white selection:text-black">
       <div className="grid-bg" />
       <Navbar />
-      <main className={isHome ? 'w-full' : 'pt-24 pb-12 px-4 w-full max-w-7xl mx-auto'}>
+      <main className={isFullPageRoute ? 'w-full' : 'pt-24 pb-12 px-4 w-full max-w-7xl mx-auto'}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
