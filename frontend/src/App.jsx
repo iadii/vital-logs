@@ -15,7 +15,7 @@ import Profile from './pages/Profile';
 
 const MainLayout = () => {
   const location = useLocation();
-  const isFullPageRoute = location.pathname === '/' || location.pathname === '/login';
+  const isFullPageRoute = ['/', '/login', '/dashboard', '/create', '/profile'].includes(location.pathname) || location.pathname.startsWith('/blog/');
 
   return (
     <div className="min-h-screen relative font-sans antialiased text-zinc-100 selection:bg-white selection:text-black">

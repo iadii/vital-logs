@@ -109,7 +109,7 @@ const BlogDetail = () => {
 
   if (blogLoading) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-zinc-950">
         <LoadingSpinner size="large" />
       </div>
     );
@@ -117,7 +117,7 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-background">
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-zinc-950">
         <div className="text-center max-w-lg w-full">
           <div className="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center mx-auto mb-6 border border-zinc-800">
             <WarningCircle weight="regular" size={32} className="text-zinc-500" />
@@ -133,13 +133,23 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 animate-fade bg-background">
-      <div className="max-w-3xl mx-auto">
-        {/* Navigation & Controls */}
-        <div className="flex items-center justify-between mb-12">
+    <div className="min-h-screen bg-zinc-950 relative">
+      {/* Background Image & Overlay */}
+       <div className="fixed inset-0 z-0">
+          <img 
+            src="/editorial_hero_image_1768204267018.png" 
+            alt="Editorial Background" 
+            className="w-full h-full object-cover opacity-20 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/50 to-zinc-950"></div>
+       </div>
+
+      <div className="relative z-10 pt-24 pb-12 px-4 animate-fade mx-auto max-w-4xl">
+         {/* Navigation & Controls */}
+        <div className="flex items-center justify-between mb-8">
           <Link
             to="/dashboard"
-            className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-medium group"
+            className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-medium group px-4 py-2 rounded-full hover:bg-white/5"
           >
             <ArrowLeft weight="bold" size={16} className="group-hover:-translate-x-1 transition-transform" />
             Back to Dashboard
@@ -150,75 +160,75 @@ const BlogDetail = () => {
               <>
                 <button
                   onClick={handleToggleShare}
-                  className={`p-2 rounded-lg border transition-colors ${
+                  className={`p-2.5 rounded-full border transition-colors ${
                     isShared 
                       ? 'bg-green-500/10 border-green-500/20 text-green-400' 
-                      : 'bg-zinc-900 border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'
+                      : 'bg-white/5 border-white/10 text-zinc-400 hover:text-white hover:bg-white/10'
                   }`}
                   title={isShared ? 'Shared (Click to Unshare)' : 'Private (Click to Share)'}
                 >
-                  <ShareNetwork weight="regular" size={16} />
+                  <ShareNetwork weight="regular" size={18} />
                 </button>
                 <Link
                   to={`/blog/${id}/edit`}
-                  className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-colors"
+                  className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
                   title="Edit"
                 >
-                  <PencilLine weight="regular" size={16} />
+                  <PencilLine weight="regular" size={18} />
                 </Link>
                 <button
                   onClick={() => setDeleteConfirm(true)}
-                  className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-900/50 hover:bg-red-950/20 text-zinc-400 hover:text-red-400 transition-colors"
+                  className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-red-500/10 hover:border-red-500/20 text-zinc-400 hover:text-red-400 transition-colors"
                   title="Delete"
                 >
-                  <Trash weight="regular" size={16} />
+                  <Trash weight="regular" size={18} />
                 </button>
               </>
             )}
             {!isOwner && isShared && (
                <button
                 onClick={() => copyToClipboard(window.location.href)}
-                className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-colors" 
+                className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors" 
                 title="Copy Link"
               >
-                <LinkIcon weight="regular" size={16} />
+                <LinkIcon weight="regular" size={18} />
               </button>
             )}
           </div>
         </div>
 
-        {/* Blog Article */}
-        <article>
-          <header className="mb-10 text-center">
-             <div className="inline-flex items-center gap-3 text-sm text-zinc-500 mb-6 font-mono">
+        {/* Blog Article Container */}
+        <article className="bg-zinc-900/30 backdrop-blur-xl border border-white/5 rounded-2xl p-8 md:p-12 shadow-2xl shadow-black/20">
+          <header className="mb-12 text-center">
+             <div className="inline-flex items-center gap-3 text-xs md:text-sm text-zinc-400 mb-6 font-mono tracking-wide uppercase">
                  <span>{formatDate(blog.createdAt)}</span>
-                 <span>•</span>
+                 <span className="text-zinc-600">•</span>
                  <span className="flex items-center gap-1">
-                   <Clock weight="regular" size={12} />
+                   <Clock weight="regular" size={14} />
                    {calculateReadTime(blog.content)} min read
                  </span>
              </div>
 
-             <h1 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight tracking-tight mb-8">
+             <h1 className="text-4xl md:text-6xl font-display font-medium text-white leading-tight tracking-tight mb-8">
                {blog.title}
              </h1>
 
-             <div className="flex items-center justify-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-zinc-800 overflow-hidden border border-zinc-700">
+             <div className="flex items-center justify-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-white/10 overflow-hidden border border-white/10 p-0.5">
                   <img 
                     src={blog.author?.picture || `https://ui-avatars.com/api/?name=${blog.author}&background=random`} 
                     alt={blog.author}
-                    className="w-full h-full object-cover" 
+                    className="w-full h-full object-cover rounded-full" 
                   />
                 </div>
                 <div className="text-left">
-                    <p className="text-white text-sm font-medium">{blog.author}</p>
-                    <p className="text-zinc-500 text-xs">Author</p>
+                    <p className="text-white text-base font-medium">{blog.author}</p>
+                    <p className="text-zinc-500 text-xs uppercase tracking-widest font-bold">Author</p>
                 </div>
              </div>
           </header>
 
-          <div className="prose prose-invert prose-zinc max-w-none prose-lg">
+          <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-p:font-serif prose-p:text-zinc-300 prose-p:leading-loose">
              <div className="whitespace-pre-wrap">{blog.content}</div>
           </div>
         </article>
@@ -227,7 +237,7 @@ const BlogDetail = () => {
       {/* Delete Modal */}
       {deleteConfirm && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade">
-          <div className="bg-zinc-900 border border-zinc-800 max-w-sm w-full p-6 rounded-xl shadow-2xl">
+          <div className="bg-zinc-900 border border-zinc-800 max-w-sm w-full p-6 rounded-2xl shadow-2xl">
             <h3 className="text-lg font-semibold text-white mb-2">Delete Story?</h3>
             <p className="text-zinc-400 text-sm mb-6">
               This action cannot be undone. This will permanently delete your story.
