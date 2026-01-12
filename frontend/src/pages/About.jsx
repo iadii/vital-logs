@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const About = () => {
   return (
     <div className="min-h-screen bg-zinc-950 relative flex flex-col">
-      {/* Background Image & Overlay */}
+      {/* Background Image & Overlay */} 
        <div className="fixed inset-0 z-0 pointer-events-none">
           <img 
             src="/editorial_hero_image_1768204267018.png" 
@@ -36,7 +36,7 @@ const About = () => {
             The modern web has become a noisy place. Algorithms dictate what we see. Ads clutter our view. The actual act of reading—and writing—has been relegated to the sidelines.
           </p>
           <p>
-            <strong className="text-white font-sans font-medium">Nano</strong> is our answer to the chaos.
+            <strong className="text-white font-sans font-medium">Vital Logs</strong> is our answer to the chaos.
           </p>
           <p>
              We stripped away the likes, the endless scroll, the gamification. We left only what matters: the blank page, the cursor, and your words. This is a sanctuary for writers who believe that simplicity is the ultimate sophistication.

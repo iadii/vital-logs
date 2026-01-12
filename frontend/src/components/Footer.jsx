@@ -5,9 +5,10 @@ const Footer = () => (
     <footer className="py-12 border-t border-white/5 bg-zinc-950">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
         
-        {/* Minimal Logo */}
-        <div className="flex items-center gap-3 opacity-50 hover:opacity-100 transition-opacity">
-           <span className="text-zinc-500 font-serif italic">write with intention.</span>
+        {/* Brand & Tagline */}
+        <div className="flex flex-col items-center md:items-start gap-1">
+           <span className="text-xl text-white font-serif italic tracking-tight font-bold">Vital Logs</span>
+           <span className="text-zinc-600 font-serif italic text-sm">write with intention.</span>
         </div>
         
         {/* Minimal Links */}

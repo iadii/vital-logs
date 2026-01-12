@@ -18,7 +18,7 @@
 }
 
 @layer components {
-  /* Nano Background - Subtle Noise */
+  /* Vital Logs Background - Subtle Noise */
   .grid-bg {
     position: fixed;
     top: 0;
@@ -31,7 +31,7 @@
     pointer-events: none;
   }
 
-  /* Nano Cards - Minimalist */
+  /* Vital Logs Cards - Minimalist */
   .pro-card {
     @apply bg-zinc-900/40 backdrop-blur-sm border border-white/5 transition-all duration-300;
   }

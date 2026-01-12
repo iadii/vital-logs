@@ -33,7 +33,7 @@ const Privacy = () => {
           <section>
             <h2 className="text-sm text-white font-bold mb-6 uppercase tracking-widest">01 — Ownership & Rights</h2>
             <p className="leading-relaxed font-serif text-lg text-zinc-400">
-              Your words belong to you. Unconditionally. We do not claim any copyright or ownership over the content you publish on Nano. You retain full rights to your intellectual property. We will never sell your personal data or your content to third parties, advertisers, or data brokers.
+              Your words belong to you. Unconditionally. We do not claim any copyright or ownership over the content you publish on Vital Logs. You retain full rights to your intellectual property. We will never sell your personal data or your content to third parties, advertisers, or data brokers.
             </p>
           </section>
 
