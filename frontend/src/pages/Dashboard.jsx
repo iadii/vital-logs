@@ -143,7 +143,7 @@ const Dashboard = () => {
       {/* Toolbar */}
       <div className="flex flex-col md:flex-row gap-4 justify-between items-center py-4 border-b border-zinc-800">
         <div className="relative w-full md:w-96">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+          <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
           <input
             type="text"
             placeholder="Search..."

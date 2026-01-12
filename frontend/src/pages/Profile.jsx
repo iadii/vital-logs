@@ -104,8 +104,8 @@ const Profile = () => {
            <nav className="space-y-1">
               {[
                 { id: 'blogs', label: 'Stories', icon: FileText },
-                { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-                { id: 'settings', label: 'Settings', icon: Settings }
+                { id: 'analytics', label: 'Analytics', icon: ChartBar },
+                { id: 'settings', label: 'Settings', icon: Gear }
               ].map((tab) => {
                 const Icon = tab.icon;
                 return (
