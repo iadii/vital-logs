@@ -133,130 +133,136 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 relative">
-      {/* Background Image & Overlay */}
-       <div className="fixed inset-0 z-0">
-          <img 
-            src="/editorial_hero_image_1768204267018.png" 
-            alt="Editorial Background" 
-            className="w-full h-full object-cover opacity-20 mix-blend-overlay"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/50 to-zinc-950"></div>
+    <div className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-white selection:text-black pb-32">
+       <div className="fixed inset-0 z-0 opacity-20 pointer-events-none">
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-40 brightness-100 contrast-150 mix-blend-overlay"></div>
        </div>
 
-      <div className="relative z-10 pt-24 pb-12 px-4 animate-fade mx-auto max-w-4xl">
-         {/* Navigation & Controls */}
-        <div className="flex items-center justify-between mb-8">
-          <Link
-            to="/dashboard"
-            className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-medium group px-4 py-2 rounded-full hover:bg-white/5"
-          >
-            <ArrowLeft weight="bold" size={16} className="group-hover:-translate-x-1 transition-transform" />
-            Back to Dashboard
-          </Link>
-          
-          <div className="flex items-center gap-2">
-            {isOwner && (
-              <>
-                <button
-                  onClick={handleToggleShare}
-                  className={`p-2.5 rounded-full border transition-colors ${
-                    isShared 
-                      ? 'bg-green-500/10 border-green-500/20 text-green-400' 
-                      : 'bg-white/5 border-white/10 text-zinc-400 hover:text-white hover:bg-white/10'
-                  }`}
-                  title={isShared ? 'Shared (Click to Unshare)' : 'Private (Click to Share)'}
+       <div className="relative z-10 pt-32 px-6 max-w-3xl mx-auto animate-fade">
+         
+         <nav className="flex items-center justify-between mb-20">
+            <Link
+              to="/dashboard"
+              className="group flex items-center gap-3 text-zinc-500 hover:text-white transition-colors text-sm font-mono uppercase tracking-widest"
+            >
+              <ArrowLeft weight="light" size={16} className="group-hover:-translate-x-1 transition-transform" />
+              <span>Back</span>
+            </Link>
+
+            <div className="flex items-center gap-4">
+              {isOwner && (
+                <>
+                  <button
+                    onClick={handleToggleShare}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest transition-all ${
+                      isShared 
+                        ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
+                        : 'text-zinc-500 hover:text-white border border-transparent hover:border-zinc-800'
+                    }`}
+                  >
+                    <ShareNetwork weight="regular" size={14} />
+                    <span>{isShared ? 'Public' : 'Private'}</span>
+                  </button>
+                  
+                  <div className="w-px h-4 bg-zinc-800"></div>
+
+                  <Link
+                    to={`/blog/${id}/edit`}
+                    className="p-2 text-zinc-500 hover:text-white transition-colors"
+                    title="Edit"
+                  >
+                    <PencilLine weight="regular" size={18} />
+                  </Link>
+                  <button
+                    onClick={() => setDeleteConfirm(true)}
+                    className="p-2 text-zinc-500 hover:text-red-400 transition-colors"
+                    title="Delete"
+                  >
+                    <Trash weight="regular" size={18} />
+                  </button>
+                </>
+              )}
+              {!isOwner && isShared && (
+                 <button
+                  onClick={() => copyToClipboard(window.location.href)}
+                  className="p-2 text-zinc-500 hover:text-white transition-colors" 
+                  title="Copy Link"
                 >
-                  <ShareNetwork weight="regular" size={18} />
+                  <LinkIcon weight="regular" size={18} />
                 </button>
-                <Link
-                  to={`/blog/${id}/edit`}
-                  className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors"
-                  title="Edit"
-                >
-                  <PencilLine weight="regular" size={18} />
-                </Link>
-                <button
-                  onClick={() => setDeleteConfirm(true)}
-                  className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-red-500/10 hover:border-red-500/20 text-zinc-400 hover:text-red-400 transition-colors"
-                  title="Delete"
-                >
-                  <Trash weight="regular" size={18} />
-                </button>
-              </>
-            )}
-            {!isOwner && isShared && (
-               <button
-                onClick={() => copyToClipboard(window.location.href)}
-                className="p-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors" 
-                title="Copy Link"
-              >
-                <LinkIcon weight="regular" size={18} />
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Blog Article Container */}
-        <article className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 md:p-12 shadow-2xl shadow-black/50">
-          <header className="mb-12 text-center">
-             <div className="inline-flex items-center gap-3 text-xs md:text-sm text-zinc-400 mb-6 font-mono tracking-wide uppercase">
-                 <span>{formatDate(blog.createdAt)}</span>
-                 <span className="text-zinc-600">•</span>
-                 <span className="flex items-center gap-1">
-                   <Clock weight="regular" size={14} />
-                   {calculateReadTime(blog.content)} min read
-                 </span>
-             </div>
-
-             <h1 className="text-4xl md:text-6xl font-display font-medium text-white leading-tight tracking-tight mb-8">
-               {blog.title}
-             </h1>
-
-             <div className="flex items-center justify-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-white/10 overflow-hidden border border-white/10 p-0.5">
-                  <img 
-                    src={blog.author?.picture || `https://ui-avatars.com/api/?name=${blog.author}&background=random`} 
-                    alt={blog.author}
-                    className="w-full h-full object-cover rounded-full" 
-                  />
-                </div>
-                <div className="text-left">
-                    <p className="text-white text-base font-medium">{blog.author}</p>
-                    <p className="text-zinc-500 text-xs uppercase tracking-widest font-bold">Author</p>
-                </div>
-             </div>
-          </header>
-
-          <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-p:font-serif prose-p:text-zinc-300 prose-p:leading-loose">
-             <div className="whitespace-pre-wrap">{blog.content}</div>
-          </div>
-        </article>
-      </div>
-
-      {/* Delete Modal */}
-      {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade">
-          <div className="bg-zinc-900 border border-zinc-800 max-w-sm w-full p-6 rounded-2xl shadow-2xl">
-            <h3 className="text-lg font-semibold text-white mb-2">Delete Story?</h3>
-            <p className="text-zinc-400 text-sm mb-6">
-              This action cannot be undone. This will permanently delete your story.
-            </p>
-            <div className="flex gap-3 justify-end">
-              <button
-                onClick={() => setDeleteConfirm(false)}
-                className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleDelete}
-                className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-colors"
-              >
-                Delete
-              </button>
+              )}
             </div>
-          </div>
+         </nav>
+
+
+         <header className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 text-xs md:text-sm text-zinc-500 mb-8 font-mono tracking-widest uppercase">
+                <span>{formatDate(blog.createdAt)}</span>
+                <span className="w-1 h-1 bg-zinc-800 rounded-full"></span>
+                <span>{calculateReadTime(blog.content)} min read</span>
+            </div>
+
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white leading-[1.1] tracking-tight mb-10">
+              {blog.title}
+            </h1>
+
+            <div className="flex items-center justify-center gap-3">
+               <div className="w-8 h-8 rounded-full bg-zinc-800 overflow-hidden ring-2 ring-zinc-950">
+                 <img 
+                   src={blog.author?.picture || `https://ui-avatars.com/api/?name=${blog.author}&background=random`} 
+                   alt={blog.author}
+                   className="w-full h-full object-cover" 
+                 />
+               </div>
+               <p className="text-sm font-serif italic text-zinc-400">by {blog.author}</p>
+            </div>
+         </header>
+
+
+         <article className="prose prose-invert prose-lg md:prose-xl max-w-none 
+            prose-headings:font-display prose-headings:font-medium prose-headings:text-white prose-headings:tracking-tight
+            prose-p:font-serif prose-p:text-zinc-300 prose-p:leading-loose prose-p:mb-8
+            prose-blockquote:font-serif prose-blockquote:italic prose-blockquote:border-l-2 prose-blockquote:border-white/20 prose-blockquote:pl-6 prose-blockquote:text-zinc-400
+            prose-strong:text-white prose-strong:font-medium
+            prose-a:text-white prose-a:underline prose-a:underline-offset-4 prose-a:decoration-zinc-700 hover:prose-a:decoration-white transition-colors"
+         >
+            <div className="whitespace-pre-wrap">{blog.content}</div>
+         </article>
+
+
+         <div className="mt-24 flex justify-center text-zinc-800">
+            <div className="flex gap-2">
+               <div className="w-1.5 h-1.5 rounded-full bg-current"></div>
+               <div className="w-1.5 h-1.5 rounded-full bg-current"></div>
+               <div className="w-1.5 h-1.5 rounded-full bg-current"></div>
+            </div>
+         </div>
+
+       </div>
+
+      
+      {deleteConfirm && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-6 animate-fade">
+           <div className="max-w-md w-full text-center">
+             <h3 className="text-2xl font-serif italic text-white mb-4">Delete this story?</h3>
+             <p className="text-zinc-400 mb-8 font-light">
+               There is no undo button for destruction.
+             </p>
+             <div className="flex items-center justify-center gap-8">
+               <button
+                 onClick={() => setDeleteConfirm(false)}
+                 className="text-sm font-mono uppercase tracking-widest text-zinc-500 hover:text-white transition-colors"
+               >
+                 Cancel
+               </button>
+               <button
+                 onClick={handleDelete}
+                 className="text-sm font-mono uppercase tracking-widest text-red-500 hover:text-red-400 transition-colors"
+               >
+                 Delete
+               </button>
+             </div>
+           </div>
         </div>
       )}
     </div>
