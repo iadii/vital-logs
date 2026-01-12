@@ -82,21 +82,30 @@ const MainLayout = () => {
         </Routes>
       </main>
       <Toaster 
-        position="bottom-right"
+        position="bottom-center"
         toastOptions={{
-          duration: 4000,
+          duration: 3000,
           style: {
-            background: 'rgba(30, 30, 40, 0.8)',
-            backdropFilter: 'blur(10px)',
+            background: '#18181b', // zinc-900
             color: '#fff',
             border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '12px',
-            padding: '16px',
+            borderRadius: '9999px',
+            padding: '12px 24px',
+            fontSize: '14px',
+            fontFamily: '"JetBrains Mono", monospace',
+            letterSpacing: '0.05em',
+            boxShadow: '0 10px 30px -10px rgba(0,0,0,0.5)',
           },
           success: {
             iconTheme: {
-              primary: '#4ade80',
-              secondary: 'black',
+              primary: '#fff',
+              secondary: '#18181b',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#fff',
             },
           },
         }}

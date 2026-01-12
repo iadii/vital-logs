@@ -77,10 +77,13 @@ const BlogDetail = () => {
     const success = await toggleBlogSharing(id, newSharedStatus);
     if (success) {
       setIsShared(newSharedStatus);
-      toast.success(newSharedStatus ? 'Blog shared successfully!' : 'Blog unshared successfully!');
+      
       if (newSharedStatus) {
         const shareUrl = `${window.location.origin}/blog/${id}`;
-        copyToClipboard(shareUrl);
+        navigator.clipboard.writeText(shareUrl);
+        toast.success('Public link copied to clipboard!');
+      } else {
+        toast.success('Blog is now private.');
       }
     } else {
       toast.error('Failed to update share status');
