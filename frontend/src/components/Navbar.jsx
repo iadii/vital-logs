@@ -23,7 +23,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="flex items-center gap-1 px-2 py-2 rou nded-full bg-zinc-900/50 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50">
+      <div className="flex items-center gap-4 px-6 py-2 rounded-full bg-zinc-900/50 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50">
         
         {/* Brand */}
         <Link to="/" className="px-5 py-2">
